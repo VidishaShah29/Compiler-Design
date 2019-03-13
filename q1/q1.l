@@ -1,24 +1,26 @@
 %{
-	int v = 0, c = 0;
+	#include "q1.tab.h"
 %}
 
 %%
 
-[aeiouAEIOU] { v++; }
-[a-zA-Z] { c+=1; } 
+"$" { return NL;}
 
+"int" { return INT; }
+
+"float" { return FLOAT; }
+
+"char" { return CHAR; }
+
+"double" { return DOUBLE; }
+
+[a-zA-Z_][a-zA-Z0-9_]* { return ID; }
+
+"," { return comma; }
 
 %%
 
-int main(int argc, char* argv[]){	
-	
-	yylex();
-	printf("Vowels: %d Consonants: %d\n", v, c);
-	return 0;
-	
-}
-
-int yywrap() {
+int yywrap(){
 
 	return 1;
 }
